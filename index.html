@@ -176,6 +176,8 @@
       font-size: 13px;
       border-radius: 6px;
       width: fit-content;
+      text-decoration: none;
+      display: inline-block;
     }
 
     .btn-primary:hover {
@@ -227,6 +229,8 @@
       cursor: pointer;
       transition: all 0.3s ease;
       white-space: nowrap;
+      text-decoration: none;
+      display: inline-block;
     }
 
     .footer-btn:hover {
@@ -436,8 +440,8 @@
         </div>
 
         <div class="buttons-group">
-          <button class="btn btn-primary">ENROL FOR FREE</button>
-          <button class="btn btn-secondary"> SHARE COURSE WITH FRIENDS</button>
+          <a href="https://www.mygreatlearning.com/academy?utm_source=public_certificate_view&utm_medium=certificate_page&utm_campaign=join_for_free_cta" class="btn btn-primary">ENROL FOR FREE</a>
+          <button class="btn btn-secondary" onclick="shareButton()"> SHARE COURSE WITH FRIENDS</button>
         </div>
       </div>
     </div>
@@ -446,8 +450,29 @@
   <!-- Footer -->
   <div class="footer">
     <div class="footer-text">Learn in-demand skills and get a certificate of your own on GL Academy</div>
-    <button class="footer-btn">JOIN FOR FREE</button>
+    <a href="https://www.mygreatlearning.com/academy?utm_source=public_certificate_view&utm_medium=certificate_page&utm_campaign=join_for_free_cta" class="footer-btn">JOIN FOR FREE</a>
   </div>
+
+  <script>
+    function shareButton() {
+      const shareData = {
+        title: 'HR Analytics Course Certificate',
+        text: 'Check out my certificate! I just completed the HR Analytics Course on Great Learning Academy.',
+        url: window.location.href
+      };
+
+      if (navigator.share) {
+        navigator.share(shareData)
+          .catch(err => console.log('Error sharing:', err));
+      } else {
+        // Fallback: Copy to clipboard
+        const textToCopy = `${shareData.title}\n${shareData.text}\n${shareData.url}`;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          alert('Share link copied to clipboard!');
+        });
+      }
+    }
+  </script>
 
 </body>
 </html>
